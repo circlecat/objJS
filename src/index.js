@@ -17,7 +17,7 @@ dotenv.config();
     credentials: true,
   }));
 
-  app.use(cookieParser);
+  app.use(cookieParser());
 
   app.get('/', (_req, res) => res.send('hello'));
 
