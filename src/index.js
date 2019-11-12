@@ -17,6 +17,7 @@ dotenv.config();
     credentials: true,
   }));
 
+  app.use(express.json());
   app.use(cookieParser());
 
   app.get('/', (_req, res) => res.send('hello'));
@@ -29,7 +30,7 @@ dotenv.config();
     next(err);
   });
 
-  app.use((err, req, res, next) => {
+  app.use((err, _req, res) => {
     res.status(err.status || 500);
     console.log(err.stack);
     res.json({
