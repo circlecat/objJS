@@ -5,6 +5,15 @@ class User extends BaseModel {
     return 'user';
   }
 
+  userJSON() {
+    return {
+      id: this.id,
+      email: this.email,
+      username: this.username,
+      created_at: this.created_at,
+    };
+  }
+
   static get jsonSchema() {
     return {
       type: 'object',

@@ -1,10 +1,19 @@
 import { Router } from 'express';
-import userController from '../../Controllers/User';
+import {
+  get,
+  register,
+  login,
+  refreshToken,
+  revokeRefreshToken,
+} from '../../Controllers/User';
+import isAuth from '../../Controllers/User/isAuth';
 
 const userRouter = Router();
 
-userRouter.get('/', userController.get);
-userRouter.post('/register', userController.register);
-userRouter.post('/login', userController.login);
+userRouter.get('/', isAuth, get);
+userRouter.post('/register', register);
+userRouter.post('/login', login);
+userRouter.get('/refresh_token', refreshToken);
+userRouter.get('/revoke_refresh_token', isAuth, revokeRefreshToken);
 
 export default userRouter;
