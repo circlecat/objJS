@@ -6,6 +6,7 @@ exports.up = knex =>
     table.foreign('userId').references('user.id').onDelete('CASCADE').onUpdate('CASCADE');
     table.string('title', 255).notNull();
     table.string('body', 10000).notNull();
+    table.timestamps(true, true);
   });
 
 exports.down = knex =>

@@ -29,6 +29,31 @@ export const get = async (req, res, next) => {
   }
 };
 
+export const update = async (req, res, next) => {
+  const { id } = req.params;
+  const { title, body } = req.body;
+
+  try {
+    const post = await Post.query().findById(id).patch({ title, body });
+
+    return res.json(post);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const remove = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    await Post.query().deleteById(id);
+
+    return res.send();
+  } catch (error) {
+    return next(error);
+  }
+};
+
 export const getAll = async (req, res, next) => {
   const { userId } = req.payload;
 
