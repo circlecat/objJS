@@ -14,7 +14,7 @@ export const get = async (req, res) => {
 
   const user = await User.query().findById(req.payload.userId);
 
-  return res.json(user.userJSON());
+  return res.json(user.userToJSON());
 };
 
 export const register = async (req, res) => {

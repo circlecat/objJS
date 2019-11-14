@@ -1,3 +1,5 @@
+import { Model } from 'objection';
+import path from 'path';
 import BaseModel from '../BaseModel';
 
 class User extends BaseModel {
@@ -5,7 +7,20 @@ class User extends BaseModel {
     return 'user';
   }
 
-  userJSON() {
+  static get relationMappings() {
+    return {
+      posts: {
+        relation: Model.HasManyRelation,
+        modelClass: path.join(__dirname, 'Post'),
+        join: {
+          from: 'user.id',
+          to: 'post.userId',
+        },
+      },
+    };
+  }
+
+  userToJSON() {
     return {
       id: this.id,
       email: this.email,

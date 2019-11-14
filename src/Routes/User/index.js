@@ -6,7 +6,7 @@ import {
   refreshToken,
   revokeRefreshToken,
 } from '../../Controllers/User';
-import isAuth from '../../Controllers/User/isAuth';
+import isAuth from '../Utils/isAuth';
 
 const userRouter = Router();
 
