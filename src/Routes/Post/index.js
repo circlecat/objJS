@@ -6,5 +6,6 @@ const postRouter = Router();
 
 postRouter.post('/', isAuth, create);
 postRouter.get('/getAll', isAuth, getAll);
+postRouter.get('/:id', get);
 
 export default postRouter;

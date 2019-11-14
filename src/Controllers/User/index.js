@@ -17,7 +17,7 @@ export const get = async (req, res) => {
   return res.json(user.userToJSON());
 };
 
-export const register = async (req, res) => {
+export const register = async (req, res, next) => {
   const { email, password, username } = req.body;
 
   if (!password) {
@@ -28,20 +28,19 @@ export const register = async (req, res) => {
   try {
     await User.query().insert({ email, username, password: hashedPass });
   } catch (error) {
-    return res.status(400).json({ errors: error.data });
+    return next(error);
   }
   return res.send('registered');
 };
 
-export const login = async (req, res) => {
+export const login = async (req, res, next) => {
   const { email, password } = req.body;
 
   try {
-    const users = await User.query().where('email', email);
-    if (!users.length) {
+    const user = await User.query().findOne('email', email);
+    if (!user) {
       return res.status(400).json({ error: 'can not find user' });
     }
-    const user = users[0].$toJson();
 
     const valid = await compare(password, user.password);
     if (!valid) {
@@ -52,7 +51,7 @@ export const login = async (req, res) => {
 
     return res.json({ accessToken: createAccessToken(user) });
   } catch (error) {
-    return res.status(400).json({ errors: error.data });
+    return next(error);
   }
 };
 
