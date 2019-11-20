@@ -13,8 +13,8 @@ const folderRouter = Router();
 folderRouter.post('/', isAuth, create);
 folderRouter.get('/getAll', isAuth, getAll);
 folderRouter.get('/:id', get);
-folderRouter.put('/:id', update);
-folderRouter.delete('/:id', remove);
+folderRouter.put('/:id', isAuth, update);
+folderRouter.delete('/:id', isAuth, remove);
 
 
 export default folderRouter;
