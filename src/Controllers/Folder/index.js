@@ -29,6 +29,31 @@ export const get = async (req, res, next) => {
   }
 };
 
+export const update = async (req, res, next) => {
+  const { id } = req.params;
+  const { title, description } = req.body;
+
+  try {
+    const folder = await Folder.query().findById(id).patch({ title, description });
+
+    return res.json(folder);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const remove = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    await Folder.query().deleteById(id);
+
+    return res.send();
+  } catch (error) {
+    return next(error);
+  }
+};
+
 export const getAll = async (req, res, next) => {
   const { userId } = req.payload;
 
