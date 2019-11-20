@@ -2,9 +2,9 @@ import { Model } from 'objection';
 import BaseModel from '../BaseModel';
 import User from '../User';
 
-class Post extends BaseModel {
+class Folder extends BaseModel {
   static get tableName() {
-    return 'post';
+    return 'folder';
   }
 
   static get relationMappings() {
@@ -13,7 +13,7 @@ class Post extends BaseModel {
         relation: Model.BelongsToOneRelation,
         modelClass: User,
         join: {
-          from: 'post.userId',
+          from: 'folder.userId',
           to: 'user.id',
         },
       },
@@ -23,15 +23,15 @@ class Post extends BaseModel {
   static get jsonSchema() {
     return {
       type: 'object',
-      required: ['userId', 'title', 'body'],
+      required: ['userId', 'title'],
       properties: {
         id: { type: 'integer', description: 'The unique identifier in base' },
         userId: { type: 'integer' },
         title: { type: 'string', minLength: 1, maxLength: 255 },
-        body: { type: 'string', minLength: 1, maxLength: 10000 },
+        description: { type: 'string', minLength: 1, maxLength: 3000 },
       },
     };
   }
 }
 
-export default Post;
+export default Folder;

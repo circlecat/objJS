@@ -9,12 +9,12 @@ class User extends BaseModel {
 
   static get relationMappings() {
     return {
-      posts: {
+      folders: {
         relation: Model.HasManyRelation,
-        modelClass: path.join(__dirname, 'Post'),
+        modelClass: path.join(__dirname, 'Folder'),
         join: {
           from: 'user.id',
-          to: 'post.userId',
+          to: 'folder.userId',
         },
       },
     };
