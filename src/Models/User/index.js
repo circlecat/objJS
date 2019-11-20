@@ -17,6 +17,14 @@ class User extends BaseModel {
           to: 'folder.userId',
         },
       },
+      dictionaries: {
+        relation: Model.HasManyRelation,
+        modelClass: path.join(__dirname, 'Dictionary'),
+        join: {
+          from: 'user.id',
+          to: 'dictionary.userId',
+        },
+      },
     };
   }
 
